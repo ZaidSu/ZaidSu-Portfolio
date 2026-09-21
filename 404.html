@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0f1720">
+  <title>Page not found — Zaid Sunna</title>
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <script>
+    (function () {
+      try {
+        var savedTheme = localStorage.getItem('zaid-portfolio-theme');
+        var theme = savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    .notfound-shell {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 22px;
+      padding: 32px 20px;
+    }
+    .notfound-mark {
+      width: 84px;
+      height: 84px;
+      border-radius: 22px;
+      background: var(--navy);
+      color: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: 30px;
+      letter-spacing: 0.01em;
+    }
+    .notfound-code {
+      font-family: 'DM Mono', monospace;
+      font-size: 15px;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .notfound-shell h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      line-height: 1.15;
+      max-width: 620px;
+    }
+    .notfound-shell p {
+      max-width: 480px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .notfound-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+  <main class="notfound-shell">
+    <div class="notfound-mark" aria-hidden="true">ZS</div>
+    <p class="notfound-code">404 — page not found</p>
+    <h1>This page doesn’t exist, but the rest of the site does.</h1>
+    <p>The link might be outdated or mistyped. Head back to the homepage to see my projects, experience, and toolkit.</p>
+    <div class="notfound-actions">
+      <a class="button button-primary" href="index.html">Back to homepage</a>
+      <a class="button" href="index.html#work">View projects</a>
+      <a class="button button-quiet" href="mailto:marnazaid5@gmail.com">Email me</a>
+    </div>
+  </main>
+</body>
+</html>
