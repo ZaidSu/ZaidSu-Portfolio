@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Zaid Sunna, a UT Dallas Computer Science student and full-stack developer building production websites, web applications, APIs, databases, and server-backed systems.">
+  <meta name="theme-color" content="#0f1720">
+  <title>Zaid Sunna — Full-Stack Developer</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <script>
+    (function () {
+      try {
+        var savedTheme = localStorage.getItem('zaid-portfolio-theme');
+        var theme = savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="nav-shell">
+      <a class="brand" href="#top" aria-label="Zaid Sunna home">
+        <span class="brand-mark">ZS</span>
+        <span>Zaid Sunna</span>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#work" data-section="work">Work</a>
+        <a href="#systems" data-section="systems">Systems</a>
+        <a href="#experience" data-section="experience">Experience</a>
+        <a href="#toolkit" data-section="toolkit">Toolkit</a>
+      </div>
+
+      <div class="nav-actions">
+        <a class="nav-github" href="https://github.com/ZaidSu" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="nav-resume" href="Zaid_Sunna_Resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#work">Work</a>
+      <a href="#systems">Systems</a>
+      <a href="#experience">Experience</a>
+      <a href="#toolkit">Toolkit</a>
+      <a href="https://github.com/ZaidSu" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="Zaid_Sunna_Resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <header class="hero page-shell" id="top">
+      <div class="hero-copy">
+        <div class="availability reveal">Open to software engineering &amp; full-stack roles</div>
+        <h1 class="reveal hero-title-compact">Software for real organizations.</h1>
+        <p class="hero-lead reveal">
+          I’m Zaid Sunna, a Computer Science student at UT Dallas graduating in December 2026. I build production websites and web applications across the stack—from responsive interfaces and CMS platforms to APIs, databases, deployments, and Linux-hosted systems.
+        </p>
+
+        <div class="hero-actions reveal">
+          <a class="button button-primary" href="mailto:marnazaid5@gmail.com">Email me</a>
+          <a class="button" href="Zaid_Sunna_Resume.pdf" target="_blank" rel="noopener">View résumé</a>
+          <a class="button button-quiet" href="https://github.com/ZaidSu" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="button button-quiet" href="https://www.linkedin.com/in/zaid-sunna-9225b8255" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+
+        <div class="hero-metrics reveal">
+          <div><strong>5+</strong><span>production web projects</span></div>
+          <div><strong>10+</strong><span>projects &amp; systems</span></div>
+          <div><strong>Linux</strong><span>server administration</span></div>
+          <div><strong>Dec ’26</strong><span>UTD graduation</span></div>
+        </div>
+      </div>
+
+      <aside class="hero-card reveal-up" aria-label="Profile summary">
+        <div class="profile-photo-wrap">
+          <img class="profile-photo" src="profile.jpg" alt="Portrait of Zaid Sunna" onerror="this.style.display='none'; document.getElementById('photoPlaceholder').style.display='flex';">
+          <div class="photo-placeholder" id="photoPlaceholder">
+            <span class="photo-initials">ZS</span>
+            <span>Add <strong>profile.jpg</strong><br>to this folder</span>
+          </div>
+          <span class="photo-status" aria-hidden="true"></span>
+        </div>
+
+        <div class="profile-meta">
+          <div class="profile-name-row">
+            <div>
+              <h2>Zaid Sunna</h2>
+              <p>Full-Stack Developer</p>
+            </div>
+            <span class="location-pill">Fairview, TX</span>
+          </div>
+
+          <div class="profile-rule"></div>
+
+          <div class="profile-item">
+            <span class="profile-label">Education</span>
+            <div><strong>UT Dallas</strong><small>B.S. Computer Science · Dec 2026</small></div>
+          </div>
+          <div class="profile-item">
+            <span class="profile-label">Focus</span>
+            <div><strong>Full-Stack Development</strong><small>Web apps · APIs · databases · CMS · deployment</small></div>
+          </div>
+          <div class="profile-item">
+            <span class="profile-label">Recent</span>
+            <div><strong>Auto One Motors</strong><small>Automation Engineer Intern · Summer 2026</small></div>
+          </div>
+          <div class="profile-item">
+            <span class="profile-label">Work auth.</span>
+            <div><strong>U.S. Citizen</strong><small>Based in Fairview, Texas</small></div>
+          </div>
+        </div>
+      </aside>
+    </header>
+
+    <section class="stack-strip" aria-label="Technical stack">
+      <div class="stack-track">
+        <span>Java</span><i>•</i><span>Python</span><i>•</i><span>JavaScript</span><i>•</i><span>React</span><i>•</i><span>Node.js / Express</span><i>•</i><span>Sanity CMS</span><i>•</i><span>SQL / MySQL</span><i>•</i><span>REST APIs</span><i>•</i><span>Firebase</span><i>•</i><span>Ubuntu Linux</span><i>•</i><span>Git / GitHub</span><i>•</i><span>C++</span>
+      </div>
+    </section>
+
+    <section class="section page-shell" id="work">
+      <div class="section-heading reveal">
+        <div>
+          <p class="eyebrow">Selected engineering work</p>
+          <h2>Projects that show the range.</h2>
+        </div>
+        <p>Production sites, internal business software, multi-role applications, databases, and infrastructure—not just front-end demos.</p>
+      </div>
+
+      <div class="filter-row reveal" aria-label="Project filters">
+        <button class="filter-button active" data-filter="all">All projects</button>
+        <button class="filter-button" data-filter="web">Web &amp; CMS</button>
+        <button class="filter-button" data-filter="systems">Systems</button>
+        <button class="filter-button" data-filter="data">Data &amp; Apps</button>
+      </div>
+
+      <div class="featured-grid">
+        <article class="project-card reveal-up" data-category="web data">
+          <div class="card-accent accent-purple"></div>
+          <div class="project-topline"><span class="project-type">EDUCATION PLATFORM</span><span class="status status-live">LIVE</span></div>
+          <h3>Thabat Academy</h3>
+          <p>Production online Qur’an education platform with responsive enrollment, tuition and donation flows, scheduling interfaces, multilingual support, and parent-facing account experiences.</p>
+          <div class="project-tags"><span>JavaScript</span><span>Responsive UI</span><span>Portal UX</span><span>Payments</span><span>Multilingual</span></div>
+          <a class="project-link" href="https://www.thabatacademy.com" target="_blank" rel="noopener">Visit live site ↗</a>
+        </article>
+
+        <article class="project-card reveal-up" data-category="web">
+          <div class="card-accent accent-teal"></div>
+          <div class="project-topline"><span class="project-type">PRODUCTION WEBSITE</span><span class="status status-live">LIVE</span></div>
+          <h3>Salam Academy / Foundation</h3>
+          <p>Built and maintained the school organization’s responsive production website and content workflow, including admissions, events, announcements, and ongoing staff updates.</p>
+          <div class="project-tags"><span>JavaScript</span><span>CMS</span><span>Responsive</span><span>Deployment</span></div>
+          <a class="project-link" href="https://www.salamfoundation.us" target="_blank" rel="noopener">Visit site ↗</a>
+        </article>
+      </div>
+
+      <div class="project-grid" id="projectGrid">
+        <article class="project-card reveal-up" data-category="web data">
+          <div class="card-accent accent-purple"></div>
+          <div class="project-topline"><span class="project-type">MULTI-ROLE SCHOOL PLATFORM</span><span class="status status-build">IN DEVELOPMENT</span></div>
+          <h3>School Management System</h3>
+          <p>Large multi-role school platform with separate Super Admin, School Admin, Teacher, Parent, and Student experiences. Includes admissions, student records, attendance, assignments, grades, billing, communications, permissions, and school-year rollover.</p>
+          <div class="project-tags"><span>JavaScript</span><span>Role-Based UI</span><span>REST/API Architecture</span><span>Data Modeling</span><span>Supabase-ready</span></div>
+          <div class="project-links-inline">
+            <a class="project-link" href="https://sms-topaz-eight.vercel.app/#home" target="_blank" rel="noopener">Open live demo ↗</a>
+            <a class="project-link" href="https://github.com/ZaidSu/SMS" target="_blank" rel="noopener">View GitHub ↗</a>
+          </div>
+        </article>
+
+        <article class="project-card reveal-up" data-category="web data">
+          <div class="card-accent accent-blue"></div>
+          <div class="project-topline"><span class="project-type">DEALERSHIP WEBSITE + OPERATIONS</span></div>
+          <h3>Auto One Motors</h3>
+          <p>Worked within the dealership’s Carsforsale.com platform to modernize and maintain an outdated live website, improve the customer-facing inventory experience, and support dealership operations with workflow automation and technical troubleshooting.</p>
+          <div class="project-tags"><span>Carsforsale</span><span>Production Web</span><span>Inventory</span><span>Automation</span><span>Support</span></div>
+          <a class="project-link" href="https://www.autoonemotorstx.com/" target="_blank" rel="noopener">Visit live site ↗</a>
+        </article>
+
+        <article class="project-card reveal-up" data-category="web data systems">
+          <div class="card-accent accent-green"></div>
+          <div class="project-topline"><span class="project-type">INTERNAL BUSINESS SOFTWARE</span></div>
+          <h3>Marketplace Order &amp; Inventory Workflow</h3>
+          <p>Built and maintained a full-stack order and inventory workflow tool for Marketplace Wholesale, reducing manual processing errors and giving the team better visibility into day-to-day inventory and order status.</p>
+          <div class="project-tags"><span>Full-Stack</span><span>Inventory</span><span>Workflow</span><span>Git</span><span>Ubuntu</span></div>
+        </article>
+
+        <article class="project-card reveal-up" data-category="web">
+          <div class="card-accent accent-red"></div>
+          <div class="project-topline"><span class="project-type">CMS WEBSITE</span><span class="status status-live">LIVE</span></div>
+          <h3>BBQ King</h3>
+          <p>Restaurant brand website with responsive pages and a Sanity-powered content setup so menu and site content can be managed without editing source files.</p>
+          <div class="project-tags"><span>Sanity Studio</span><span>JavaScript</span><span>CMS Schema</span><span>CORS</span></div>
+          <a class="project-link" href="https://www.bbqking.net" target="_blank" rel="noopener">Visit site ↗</a>
+        </article>
+
+        <article class="project-card reveal-up" data-category="web data">
+          <div class="card-accent accent-gold"></div>
+          <div class="project-topline"><span class="project-type">E-COMMERCE</span><span class="status">DEPLOYED</span></div>
+          <h3>Rawh Wa Rayhan</h3>
+          <p>Full-stack fragrance storefront with product listings, cart state, checkout flow, and CMS-based product/content updates designed for non-technical management.</p>
+          <div class="project-tags"><span>Full-Stack</span><span>JavaScript</span><span>CMS</span><span>Checkout</span></div>
+          <a class="project-link" href="https://www.rawhwarayhan.com" target="_blank" rel="noopener">Visit site ↗</a>
+        </article>
+
+        <article class="project-card reveal-up" data-category="data">
+          <div class="card-accent accent-purple"></div>
+          <div class="project-topline"><span class="project-type">DATABASE SYSTEM</span><span class="status">COURSE PROJECT</span></div>
+          <h3>The Coffee Collective</h3>
+          <p>Relational database design for a coffee business covering locations, employees, customers, orders, products, inventory, suppliers, loyalty accounts, and online accounts.</p>
+          <div class="project-tags"><span>SQL</span><span>MySQL</span><span>ER Modeling</span><span>Normalization</span></div>
+        </article>
+
+        <article class="project-card reveal-up" data-category="systems">
+          <div class="card-accent accent-orange"></div>
+          <div class="project-topline"><span class="project-type">OPERATING SYSTEMS</span><span class="status">COURSEWORK</span></div>
+          <h3>Linux Process &amp; Thread Projects</h3>
+          <p>Systems programming work using processes, pipes, pthreads, CPU/memory/disk concepts, and Linux command-line tooling in the UT Dallas server environment.</p>
+          <div class="project-tags"><span>C / C++</span><span>pthreads</span><span>Pipes</span><span>Linux</span></div>
+        </article>
+
+        <article class="project-card reveal-up" data-category="systems">
+          <div class="card-accent accent-mint"></div>
+          <div class="project-topline"><span class="project-type">SERVER + PLUGINS</span><span class="status status-demo">INTERACTIVE DEMO</span></div>
+          <h3>Peaceful Valley</h3>
+          <p>Custom Java plugin suite and multiplayer server environment with command systems, economy, inventory GUIs, persistence, staff tooling, and Linux server administration.</p>
+          <div class="project-tags"><span>Java</span><span>PaperMC</span><span>Ubuntu</span><span>SQLite / MySQL</span><span>SSH</span></div>
+          <a class="project-link" href="peaceful-valley.html">Open interactive project ↗</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section systems-section" id="systems">
+      <div class="page-shell">
+        <div class="section-heading inverse reveal">
+          <div>
+            <p class="eyebrow">Systems &amp; infrastructure</p>
+            <h2>I’m comfortable below the UI too.</h2>
+          </div>
+          <p>Deployment, Linux, SSH, database-backed applications, content infrastructure, and server-side debugging are part of the work—not an afterthought.</p>
+        </div>
+
+        <div class="systems-layout">
+          <div class="terminal-card reveal-up" aria-label="Example server workflow">
+            <div class="terminal-top"><span></span><span></span><span></span><b>zaid@server:~</b></div>
+            <div class="terminal-body">
+              <p><em>$</em> ssh production-server</p>
+              <p class="terminal-dim">Connected to Ubuntu Linux</p>
+              <p><em>$</em> git status</p>
+              <p class="terminal-good">working tree clean</p>
+              <p><em>$</em> systemctl --type=service</p>
+              <p class="terminal-dim">checking running services...</p>
+              <p><em>$</em> mysql -u app_user -p</p>
+              <p class="terminal-good">database connection ready</p>
+              <p><em>$</em> <span class="cursor"></span></p>
+            </div>
+          </div>
+
+          <div class="system-list">
+            <article class="system-row reveal-up">
+              <span class="system-number">01</span>
+              <div><h3>Ubuntu server administration</h3><p>SSH access, Java/runtime configuration, deployment, troubleshooting, port/network management, cron-based automation, and keeping live services usable.</p></div>
+            </article>
+            <article class="system-row reveal-up">
+              <span class="system-number">02</span>
+              <div><h3>Java multiplayer servers</h3><p>Managed multiple live Minecraft server environments and wrote custom PaperMC/Spigot plugins using object-oriented and event-driven Java.</p></div>
+            </article>
+            <article class="system-row reveal-up">
+              <span class="system-number">03</span>
+              <div><h3>Sanity &amp; CMS infrastructure</h3><p>Configured structured content, schemas, Studio workflows, CORS, and editable content systems so clients and staff can update websites without touching code.</p></div>
+            </article>
+            <article class="system-row reveal-up">
+              <span class="system-number">04</span>
+              <div><h3>APIs, data &amp; automation</h3><p>Built workflow-oriented interfaces around REST APIs, SQL/MySQL data, validation logic, internal processes, and automation that reduces repetitive manual work.</p></div>
+            </article>
+          </div>
+        </div>
+
+        <div class="server-chips reveal">
+          <span>Ubuntu Linux</span><span>SSH</span><span>Git</span><span>GitHub</span><span>Java Runtime</span><span>PaperMC / Spigot</span><span>MySQL</span><span>SQLite</span><span>REST APIs</span><span>Sanity Studio</span><span>Cron</span><span>Networking</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section page-shell" id="experience">
+      <div class="section-heading reveal">
+        <div>
+          <p class="eyebrow">Experience</p>
+          <h2>Software used by real teams.</h2>
+        </div>
+        <p>My experience has been hands-on: talking with users, translating workflows into software, deploying it, and fixing it when reality finds the edge cases.</p>
+      </div>
+
+      <div class="timeline">
+        <article class="timeline-item reveal-up">
+          <div class="timeline-date">Summer 2026</div>
+          <div class="timeline-content">
+            <div class="timeline-head"><h3>Automation Engineer Intern</h3><span>Auto One Motors LLC</span></div>
+            <ul>
+              <li>Worked with the dealership’s Carsforsale.com platform to refresh and maintain an outdated production website, improving customer-facing inventory and dealership information.</li>
+              <li>Built workflow automations and internal process improvements that reduced repetitive manual work and made follow-up and tracking more consistent.</li>
+              <li>Supported live technical systems, troubleshot issues, gathered staff requirements, and translated day-to-day dealership needs into practical software changes.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="timeline-item reveal-up">
+          <div class="timeline-date">Aug 2024 — Aug 2026</div>
+          <div class="timeline-content">
+            <div class="timeline-head"><h3>Software Developer &amp; Automation Specialist</h3><span>Marketplace Wholesale LLC</span></div>
+            <ul>
+              <li>Built and maintained a full-stack order and inventory workflow tool used to reduce processing errors and improve inventory visibility.</li>
+              <li>Developed internal web applications, CMS-driven sites, and automation solutions across front-end, back-end, and business-process needs.</li>
+              <li>Handled Git-based development, deployment, troubleshooting, and Ubuntu/server administration for live business systems.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="timeline-item reveal-up">
+          <div class="timeline-date">Jan 2025 — May 2026</div>
+          <div class="timeline-content">
+            <div class="timeline-head"><h3>Full-Stack Developer</h3><span>Salam Foundation Inc. / Salam Academy</span></div>
+            <ul>
+              <li>Developed and deployed the organization’s production website and CMS, allowing non-technical staff to manage admissions, events, announcements, and other content.</li>
+              <li>Built and improved administrative workflows, maintained production functionality, and resolved issues affecting day-to-day staff processes.</li>
+              <li>Worked directly with staff to gather requirements, validate changes before deployment, and support ongoing use of the organization’s technical tools.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section toolkit-section page-shell" id="toolkit">
+      <div class="section-heading reveal">
+        <div>
+          <p class="eyebrow">Toolkit</p>
+          <h2>What I actually work with.</h2>
+        </div>
+        <p>A practical stack shaped by projects, coursework, business needs, and maintaining things after they ship.</p>
+      </div>
+
+      <div class="toolkit-grid">
+        <article class="toolkit-card reveal-up">
+          <p>Languages</p>
+          <h3>Java · Python · JavaScript · C++ · C# · SQL · HTML · CSS</h3>
+          <small>Object-oriented, scripting, web, and systems coursework/project experience.</small>
+        </article>
+        <article class="toolkit-card reveal-up">
+          <p>Web &amp; application</p>
+          <h3>React · Node.js · Express.js · REST APIs · Tailwind CSS · Responsive UI</h3>
+          <small>Full-stack applications, internal tools, CMS-driven sites, and API integrations.</small>
+        </article>
+        <article class="toolkit-card reveal-up">
+          <p>Content &amp; data</p>
+          <h3>Sanity CMS · MySQL · MongoDB · Firebase · SQLite · Data Modeling</h3>
+          <small>Structured content, relational/non-relational data, and maintainable data flows.</small>
+        </article>
+        <article class="toolkit-card reveal-up">
+          <p>Automation &amp; systems</p>
+          <h3>Python Scripting · Workflow Automation · Ubuntu · SSH · Git/GitHub · Server Deployment</h3>
+          <small>Validation, troubleshooting, process automation, and debugging from browser to terminal.</small>
+        </article>
+      </div>
+
+      <div class="education-band reveal-up">
+        <div>
+          <span class="education-kicker">THE UNIVERSITY OF TEXAS AT DALLAS</span>
+          <h3>B.S. Computer Science · Expected December 2026</h3>
+        </div>
+        <p>Database Systems · Operating Systems · Algorithms · Automata Theory · Computer Graphics</p>
+      </div>
+    </section>
+
+    <section class="contact-section">
+      <div class="page-shell contact-shell reveal-up">
+        <div>
+          <p class="eyebrow">Let’s build something useful.</p>
+          <h2>Looking for my next software engineering opportunity.</h2>
+          <p>Open to software engineering, full-stack, backend, web application, and adjacent technical opportunities in DFW or remote.</p>
+        </div>
+        <div class="contact-actions">
+          <a class="button button-light" href="mailto:marnazaid5@gmail.com">marnazaid5@gmail.com</a>
+          <a class="button button-outline-light" href="tel:+14695560675">(469) 556-0675</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer page-shell">
+    <span>© <span id="currentYear">2026</span> Zaid Sunna</span>
+    <div>
+      <a href="https://github.com/ZaidSu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/zaid-sunna-9225b8255" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="Zaid_Sunna_Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

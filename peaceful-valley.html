@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peaceful Valley — Zaid Sunna</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FBFAF5; --surface:#FFFFFF; --ink:#14171C; --ink-muted:#5B6470; --line:#E7E3D8;
+    --blue:#2F6FED; --coral:#FF6B4A; --mint:#16B378; --violet:#8B5CF6; --sun:#FFC93C;
+    --radius:16px; --maxw:920px;
+    --term-bg:#0B0D0C; --term-line:#1B1F1D;
+    --term-green:#5FD97A; --term-white:#E8ECE9; --term-gray:#7C877E; --term-gold:#E8C158; --term-red:#F3695E;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{ background:var(--bg); color:var(--ink); font-family:'Inter',sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a{ color:var(--blue); text-decoration:none; }
+  a:focus-visible, button:focus-visible{ outline:3px solid var(--blue); outline-offset:2px; }
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 22px; }
+
+  /* top bar */
+  .topbar{ position:sticky; top:0; z-index:40; background:rgba(251,250,245,0.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
+  .topbar-inner{ max-width:var(--maxw); margin:0 auto; padding:14px 22px; display:flex; align-items:center; justify-content:space-between; }
+  .back-link{ font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600; color:var(--ink); display:flex; align-items:center; gap:6px; }
+  .back-link:hover{ color:var(--blue); text-decoration:none; }
+  .disclosure-pill{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-muted); border:1px solid var(--line); padding:5px 10px; border-radius:999px; }
+
+  .intro{ padding:44px 0 20px; }
+  .eyebrow{ font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--coral); margin-bottom:10px; }
+  h1{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(1.9rem,6vw,2.7rem); letter-spacing:-0.01em; }
+  .sub{ font-family:'IBM Plex Mono',monospace; font-size:14px; color:var(--blue); font-weight:600; margin-top:6px; }
+  .intro p{ margin-top:16px; max-width:66ch; color:#3A414B; font-size:15.5px; }
+  .tech-tags{ margin-top:16px; display:flex; flex-wrap:wrap; gap:8px; }
+  .tech-tags span{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; font-weight:600; padding:5px 12px; border-radius:999px; border:1.5px solid var(--ink); }
+
+  /* -------- TERMINAL -------- */
+  .term-shell{
+    margin:30px 0 10px;
+    background:var(--term-bg);
+    border-radius:14px;
+    border:1px solid #262b28;
+    box-shadow:0 20px 50px -20px rgba(0,0,0,0.5);
+    overflow:hidden;
+  }
+  .term-header{
+    display:flex; align-items:center; gap:10px;
+    padding:10px 14px;
+    background:#111412;
+    border-bottom:1px solid #23281f;
+  }
+  .term-header .tdot{ width:11px; height:11px; border-radius:50%; }
+  .term-header .tdot.r{ background:#EA6558; }
+  .term-header .tdot.y{ background:#E8C158; }
+  .term-header .tdot.g{ background:#5FD97A; }
+  .term-header .title{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8B958E; margin-left:6px; }
+  .term-header .skip-btn{
+    margin-left:auto;
+    font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600;
+    color:#8B958E; background:transparent; border:1px solid #2C332D; border-radius:6px;
+    padding:5px 10px; cursor:pointer;
+  }
+  .term-header .skip-btn:hover{ color:var(--term-white); border-color:#454d46; }
+
+  .term-body{
+    height:460px;
+    height:min(62vh, 560px);
+    min-height:340px;
+    overflow-y:auto;
+    padding:18px 18px 8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13.5px;
+    color:var(--term-white);
+  }
+  @media (max-width:560px){ .term-body{ font-size:12.5px; height:66vh; } }
+
+  .term-line{ white-space:pre-wrap; word-break:break-word; line-height:1.55; }
+  .l-green{ color:var(--term-green); }
+  .l-red{ color:var(--term-red); }
+  .l-gold{ color:var(--term-gold); }
+  .l-gray{ color:var(--term-gray); }
+  .l-white{ color:var(--term-white); }
+  .l-blue{ color:#6FA8FF; }
+  .term-line a{ color:#6FA8FF; text-decoration:underline; }
+  .ascii{ color:var(--term-green); font-size:12px; line-height:1.3; }
+  @media (max-width:700px){ .ascii.full{ display:none; } }
+  @media (min-width:701px){ .ascii.compact{ display:none; } }
+
+  .blink-cursor{
+    display:inline-block;
+    width:8px; height:14px;
+    background:var(--term-green);
+    animation:blinkCursor 1s steps(1) infinite;
+    vertical-align:text-bottom;
+    box-shadow:0 0 6px rgba(95,217,122,0.5);
+  }
+  @keyframes blinkCursor{ 50%{ opacity:0; } }
+  @media (prefers-reduced-motion: reduce){ .blink-cursor{ animation:none; } }
+
+  .term-input-row{
+    display:flex; align-items:center; gap:8px;
+    padding:4px 0 4px;
+  }
+  .term-prompt{ color:var(--term-green); font-weight:600; flex-shrink:0; }
+  .term-input{
+    flex:1; background:transparent; border:0; outline:0;
+    color:var(--term-white); font-family:'IBM Plex Mono', monospace; font-size:13.5px;
+    caret-color:var(--term-green);
+  }
+  @media (max-width:560px){ .term-input{ font-size:12.5px; } }
+
+  .term-footer{
+    padding:8px 18px 14px;
+    border-top:1px solid #1c211d;
+  }
+  .term-hint{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:#5C665D; }
+
+  /* -------- module cards -------- */
+  section{ padding:46px 0; border-top:1px solid var(--line); }
+  h2{ font-family:'Space Grotesk',sans-serif; font-size:clamp(1.3rem,3.6vw,1.7rem); font-weight:700; margin-bottom:22px; }
+  .lead{ color:#3A414B; font-size:15px; max-width:70ch; margin-bottom:22px; }
+
+  .module-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:680px){ .module-grid{ grid-template-columns:1fr; } }
+  .module-card{
+    background:var(--surface); border:2px solid var(--ink); border-radius:var(--radius);
+    padding:20px; box-shadow:5px 5px 0 var(--line);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .module-card:hover{ transform:translateY(-3px); box-shadow:6px 7px 0 var(--blue); }
+  .module-card:nth-child(2):hover{ box-shadow:6px 7px 0 var(--mint); }
+  .module-card:nth-child(3):hover{ box-shadow:6px 7px 0 var(--violet); }
+  .module-card:nth-child(4):hover{ box-shadow:6px 7px 0 var(--coral); }
+  .module-card h3{ font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:700; margin-bottom:6px; }
+  .module-card p{ font-size:13.5px; color:#4A515B; margin-bottom:14px; }
+  .explore-module{
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; font-weight:700;
+    background:var(--ink); color:#fff; border:none; border-radius:999px;
+    padding:8px 14px; cursor:pointer;
+  }
+  .explore-module:hover{ background:var(--blue); }
+
+  /* -------- architecture diagram -------- */
+  .diagram{
+    background:var(--surface); border:2px solid var(--ink); border-radius:var(--radius);
+    padding:26px; box-shadow:5px 5px 0 var(--sun);
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px;
+  }
+  .diagram-row{ display:flex; justify-content:center; margin:10px 0; }
+  .diagram-box{ border:1.5px solid var(--ink); border-radius:8px; padding:8px 14px; background:var(--bg); text-align:center; }
+  .diagram-arrow{ text-align:center; color:var(--ink-muted); margin:2px 0; }
+  .diagram-branches{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:10px 0; }
+  .diagram-branches .diagram-box{ font-size:11.5px; }
+  .diagram-sub{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:10px; }
+  .diagram-sub span{ font-size:11px; color:var(--ink-muted); border:1px dashed var(--line); padding:5px 10px; border-radius:6px; }
+
+  /* -------- code snippets -------- */
+  .snippet{
+    background:#12161A; color:#D8DEE4; border-radius:12px; padding:16px 18px;
+    font-family:'IBM Plex Mono',monospace; font-size:12px; overflow-x:auto; margin-bottom:14px;
+    border:1px solid #232a30;
+  }
+  .snippet .cmt{ color:#7C8894; }
+  .snippet .kw{ color:#6FA8FF; }
+  .snippet .str{ color:#E8C158; }
+  .snippet .fn{ color:#5FD97A; }
+  .snippet .annotation{ color:#E8C158; }
+  .snippet-label{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-muted); margin-bottom:6px; }
+
+  .future-list{ display:flex; flex-wrap:wrap; gap:8px; }
+  .future-list span{ font-family:'IBM Plex Mono',monospace; font-size:12px; padding:6px 12px; border:1px dashed var(--line); border-radius:999px; color:var(--ink-muted); }
+
+  .github-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top:8px; }
+  .btn{ font-family:'Inter',sans-serif; font-size:14px; font-weight:600; padding:11px 20px; border-radius:999px; border:2px solid var(--ink); color:var(--ink); background:var(--surface); display:inline-flex; align-items:center; gap:8px; transition:transform .15s ease, box-shadow .15s ease; }
+  .btn:hover{ transform:translateY(-2px); box-shadow:4px 4px 0 var(--ink); text-decoration:none; }
+  .btn.primary{ background:var(--ink); color:#fff; }
+
+  footer{ padding:40px 0 60px; text-align:center; }
+  .footer-line{ font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--ink-muted); }
+  .footer-line a{ color:var(--ink); font-weight:600; }
+
+  /* -------- demo GUI modal -------- */
+  .gui-overlay{
+    position:fixed; inset:0; background:rgba(10,12,10,0.7);
+    display:none; align-items:center; justify-content:center; z-index:100; padding:20px;
+  }
+  .gui-overlay.open{ display:flex; }
+  .gui-modal{
+    background:#1B1F1D; border:2px solid #333A34; border-radius:12px;
+    width:100%; max-width:360px; padding:20px;
+    font-family:'IBM Plex Mono',monospace;
+  }
+  .gui-modal h3{ color:#E8ECE9; font-size:14px; letter-spacing:0.05em; text-align:center; margin-bottom:16px; }
+  .gui-slots{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  .gui-slot{
+    aspect-ratio:1; background:#262B27; border:2px solid #3A423C; border-radius:6px;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    color:#C9D1CC; font-size:10.5px; font-weight:600; cursor:pointer; padding:4px;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .gui-slot:hover{ background:#323932; border-color:var(--term-green); color:#fff; }
+  .gui-close{
+    margin-top:16px; width:100%; padding:9px; background:transparent;
+    border:1px solid #3A423C; border-radius:6px; color:#8B958E;
+    font-family:'IBM Plex Mono',monospace; font-size:12px; cursor:pointer;
+  }
+  .gui-close:hover{ color:#fff; border-color:#5c665e; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="back-link" href="index.html">← Back to Portfolio</a>
+    <span class="disclosure-pill">Interactive simulation, not a live server</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="intro">
+    <div class="eyebrow">Featured Project</div>
+    <h1>Peaceful Valley</h1>
+    <div class="sub">Minecraft Server &amp; Plugin Suite</div>
+    <p>Peaceful Valley is a reconstructed Minecraft server and plugin ecosystem based on a project I originally built a few years ago. It combines custom Java plugins, player utilities, a virtual economy, inventory-based GUIs, and Linux server administration. This page is an interactive, in-browser <strong>simulation</strong> of that system — type real commands into the console below and see it respond. It's not connected to a live Minecraft server; the terminal logic runs entirely in your browser.</p>
+    <div class="tech-tags">
+      <span>Java</span><span>PaperMC / Spigot API</span><span>Event-Driven Programming</span>
+      <span>OOP</span><span>SQLite / MySQL</span><span>Ubuntu Linux</span><span>SSH</span><span>Git</span><span>Networking</span>
+    </div>
+  </div>
+
+  <!-- ============ TERMINAL ============ -->
+  <div class="term-shell">
+    <div class="term-header">
+      <span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span>
+      <span class="title">peaceful-valley — server console</span>
+      <button class="skip-btn" id="skipBtn">Skip Boot</button>
+    </div>
+    <div class="term-body" id="termBody" tabindex="0"></div>
+    <div class="term-footer">
+      <div class="term-input-row">
+        <span class="term-prompt">PV &gt;</span>
+        <input type="text" class="term-input" id="termInput" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Peaceful Valley terminal input" disabled>
+      </div>
+      <div class="term-hint">Type <b>help</b> to see commands · ↑ / ↓ for history · Tab to autocomplete</div>
+    </div>
+  </div>
+
+  <!-- ============ OVERVIEW ============ -->
+  <section id="overview">
+    <div class="eyebrow">Overview</div>
+    <h2>What Peaceful Valley Is</h2>
+    <p class="lead">Peaceful Valley is a reconstructed Minecraft server and plugin ecosystem based on a project I originally developed several years ago. The system combines custom Java plugins, player utilities, virtual economy features, inventory-based interfaces, and server administration tools. It was rebuilt and modernized to demonstrate practical experience with Java, object-oriented programming, event-driven development, data persistence, Linux server administration, and multiplayer server architecture.</p>
+
+    <div class="eyebrow">The Challenge</div>
+    <p class="lead" style="margin-top:-10px;">Vanilla Minecraft server commands are slow to type and offer no economy, persistent player data, or custom menus out of the box. Peaceful Valley's plugins shortened common admin/player workflows (e.g. <code>/gamemode creative Zaid</code> → <code>/gmc Zaid</code>), added a full virtual economy with validation, and gave players and staff inventory-based menus instead of memorized commands.</p>
+  </section>
+
+  <!-- ============ ARCHITECTURE ============ -->
+  <section id="architecture">
+    <div class="eyebrow">Architecture</div>
+    <h2>System Diagram</h2>
+    <div class="diagram">
+      <div class="diagram-row"><div class="diagram-box">Minecraft Player</div></div>
+      <div class="diagram-arrow">↓</div>
+      <div class="diagram-row"><div class="diagram-box">PaperMC Server</div></div>
+      <div class="diagram-arrow">↓</div>
+      <div class="diagram-row"><div class="diagram-box"><b>Peaceful Valley Plugin Suite</b></div></div>
+      <div class="diagram-branches">
+        <div class="diagram-box">PV-Core</div>
+        <div class="diagram-box">PV-Economy</div>
+        <div class="diagram-box">PV-GUI</div>
+        <div class="diagram-box">PV-Administration</div>
+      </div>
+      <div class="diagram-arrow">↓</div>
+      <div class="diagram-sub">
+        <span>Database</span><span>Configuration</span><span>Player Data</span><span>Ubuntu Server</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MODULES ============ -->
+  <section id="modules">
+    <div class="eyebrow">Plugin Modules</div>
+    <h2>Four Plugins, One Suite</h2>
+    <div class="module-grid">
+      <div class="module-card">
+        <h3>PV-Core</h3>
+        <p>Quick commands and core player utilities — gamemode aliases, messaging, spawn/home system, permission checks.</p>
+        <button class="explore-module" data-cmd="inspect pv-core">Explore Module</button>
+      </div>
+      <div class="module-card">
+        <h3>PV-Economy</h3>
+        <p>Payments, balances, requests, transaction history, and economy persistence across the server.</p>
+        <button class="explore-module" data-cmd="inspect pv-economy">Explore Module</button>
+      </div>
+      <div class="module-card">
+        <h3>PV-GUI</h3>
+        <p>Inventory-based interfaces and interactive server menus built on Minecraft's inventory events.</p>
+        <button class="explore-module" data-cmd="inspect pv-gui">Explore Module</button>
+      </div>
+      <div class="module-card">
+        <h3>PV-Administration</h3>
+        <p>Server administration and moderation utilities — staff commands, broadcasts, economy controls.</p>
+        <button class="explore-module" data-cmd="inspect pv-administration">Explore Module</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CODE ============ -->
+  <section id="code">
+    <div class="eyebrow">Command Architecture</div>
+    <h2>Code Examples</h2>
+    <p class="lead">Small, representative snippets showing how the real plugin suite is structured — commands, events, and economy logic live in their own classes rather than one giant file.</p>
+
+    <div class="snippet-label">commands/GameModeCommand.java</div>
+    <div class="snippet"><span class="cmt">// Registers /gmc, /gms, /gma, /gmsp with optional target player</span>
+<span class="kw">public class</span> GameModeCommand <span class="kw">implements</span> CommandExecutor {
+    <span class="kw">public boolean</span> <span class="fn">onCommand</span>(CommandSender sender, Command cmd, String label, String[] args) {
+        Player target = args.length &gt; 0 ? Bukkit.getPlayer(args[0]) : (Player) sender;
+        <span class="kw">if</span> (target == <span class="kw">null</span>) { sender.sendMessage(<span class="str">"Player not found."</span>); <span class="kw">return true</span>; }
+        target.setGameMode(resolveMode(label));
+        <span class="kw">return true</span>;
+    }
+}</div>
+
+    <div class="snippet-label">economy/EconomyService.java</div>
+    <div class="snippet"><span class="cmt">// Core transfer logic used by /pay</span>
+<span class="kw">public</span> TransactionResult <span class="fn">transfer</span>(UUID from, UUID to, BigDecimal amount) {
+    <span class="kw">if</span> (amount.compareTo(BigDecimal.ZERO) &lt;= 0)
+        <span class="kw">return</span> TransactionResult.fail(<span class="str">"Amount must be greater than $0."</span>);
+    <span class="kw">if</span> (getBalance(from).compareTo(amount) &lt; 0)
+        <span class="kw">return</span> TransactionResult.fail(<span class="str">"Insufficient funds."</span>);
+    repository.adjustBalance(from, amount.negate());
+    repository.adjustBalance(to, amount);
+    <span class="kw">return</span> TransactionResult.success();
+}</div>
+
+    <div class="snippet-label">listeners/InventoryClickListener.java</div>
+    <div class="snippet"><span class="cmt">// Handles clicks inside PV-GUI menus</span>
+<span class="annotation">@EventHandler</span>
+<span class="kw">public void</span> <span class="fn">onInventoryClick</span>(InventoryClickEvent event) {
+    <span class="kw">if</span> (!(event.getInventory().getHolder() <span class="kw">instanceof</span> PVMenu)) <span class="kw">return</span>;
+    event.setCancelled(<span class="kw">true</span>);
+    ((PVMenu) event.getInventory().getHolder()).handleClick(event.getSlot(), (Player) event.getWhoClicked());
+}</div>
+
+    <div class="github-row">
+      <a class="btn primary" href="https://github.com/ZaidSu" target="_blank" rel="noopener">View GitHub Profile ↗</a>
+    </div>
+  </section>
+
+  <!-- ============ WHAT I LEARNED ============ -->
+  <section id="learned">
+    <div class="eyebrow">What I Learned</div>
+    <h2>Skills This Project Demonstrates</h2>
+    <p class="lead">Even though the surface is a Minecraft server, the engineering underneath is general-purpose: Java development, object-oriented design, event-driven systems, command parsing and validation, state management, persistent storage, relational databases, server-side programming, Linux administration, networking, Git-based version control, modular architecture, and error handling. It's software engineering built around a Minecraft server environment — not just gameplay.</p>
+
+    <div class="eyebrow" style="margin-top:26px;">Future Development</div>
+    <div class="future-list">
+      <span>Player marketplace</span><span>Auction house</span><span>Economy shop</span><span>Daily rewards</span>
+      <span>Achievements</span><span>Web dashboard</span><span>REST API</span><span>Cross-server economy</span>
+      <span>Redis messaging</span><span>Docker deployment</span>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-line">
+      <a href="index.html">← Back to Portfolio</a> &nbsp;·&nbsp;
+      <a href="mailto:marnazaid5@gmail.com">marnazaid5@gmail.com</a>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ============ DEMO GUI MODAL ============ -->
+<div class="gui-overlay" id="guiOverlay">
+  <div class="gui-modal">
+    <h3>PEACEFUL VALLEY MENU</h3>
+    <div class="gui-slots">
+      <div class="gui-slot" data-cmd="profile">PROFILE</div>
+      <div class="gui-slot" data-cmd="balance">ECONOMY</div>
+      <div class="gui-slot" data-cmd="baltop">SHOP</div>
+      <div class="gui-slot" data-cmd="server">SERVER</div>
+      <div class="gui-slot" data-cmd="status">SETTINGS</div>
+      <div class="gui-slot" data-cmd="players">PLAYERS</div>
+    </div>
+    <button class="gui-close" id="guiClose">Close Menu</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const termBody = document.getElementById('termBody');
+  const termInput = document.getElementById('termInput');
+  const skipBtn = document.getElementById('skipBtn');
+  const guiOverlay = document.getElementById('guiOverlay');
+  const guiClose = document.getElementById('guiClose');
+
+  /* ---------------- state ---------------- */
+  const state = {
+    currentUser: 'John',
+    players: {
+      John:  { balance: 12450.00, flying:false, home:true },
+      Billy: { balance: 7820.00,  flying:false, home:false },
+      Notch: { balance: 9100.00,  flying:false, home:false },
+      Archy: { balance: 3200.00,  flying:false, home:false },
+      Bob:   { balance: 15600.00, flying:false, home:false }
+    },
+    requests: [],
+    transactions: [
+      { id:1042, from:'John', to:'Billy', amount:500.00, status:'Completed' },
+      { id:1041, from:'Bob', to:'Archy', amount:150.00, status:'Completed' },
+      { id:1040, from:'Billy', to:'Notch', amount:75.00, status:'Completed' }
+    ],
+    nextTxId: 1043,
+    history: [],
+    histIndex: -1
+  };
+  const PLAYER_NAMES = Object.keys(state.players);
+
+  function fmt(n){ return '$' + Number(n).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+
+  /* ---------------- terminal rendering ---------------- */
+  function line(text, cls){
+    const div = document.createElement('div');
+    div.className = 'term-line' + (cls ? ' ' + cls : '');
+    div.innerHTML = text;
+    termBody.appendChild(div);
+  }
+  function blank(){ line('&nbsp;'); }
+  function scrollToBottom(){ termBody.scrollTop = termBody.scrollHeight; }
+
+  function printLines(arr){
+    arr.forEach(item => {
+      if (typeof item === 'string') line(item);
+      else line(item.text, item.cls);
+    });
+    scrollToBottom();
+  }
+
+  /* ---------------- boot sequence ---------------- */
+  const asciiFull = `------------------------------------------------
+|                                              |
+|        ___             \\        /            |
+|       |   |             \\      /             |
+|       |___|              \\    /              |
+|       |                   \\  /               |
+|       |                    \\/                |
+|                                              |
+|______________________________________________|`;
+
+  const asciiCompact = `--------------------------
+|                        |
+|  __        \\   /       |
+|  |  |       \\ /        |
+|  |__|        \\/        |
+|                        |
+|________________________|`;
+
+  const bootLines = [
+    { text:'root@peaceful-valley:~$ ./start.sh', cls:'l-white' },
+    { text:'[18:42:01 INFO]: Starting Peaceful Valley Server...', cls:'l-gray' },
+    { text:'[18:42:01 INFO]: Loading configuration...', cls:'l-gray' },
+    { text:'[18:42:02 INFO]: Initializing Java runtime (OpenJDK 17)...', cls:'l-gray' },
+    { text:'[18:42:02 INFO]: Binding to port 25565...', cls:'l-gray' },
+    { text:'[18:42:02 INFO]: Connecting to Ubuntu host...', cls:'l-gray' },
+    { text:'[18:42:03 INFO]: Connection established.', cls:'l-green' },
+    { text:'&nbsp;' }
+  ];
+
+  const pluginLoadLines = [
+    { text:'[PeacefulValley] Loading PV-Core...', cls:'l-green' },
+    { text:'[PeacefulValley] Loading PV-Economy...', cls:'l-green' },
+    { text:'[PeacefulValley] Loading PV-GUI...', cls:'l-green' },
+    { text:'[PeacefulValley] Loading PV-Administration...', cls:'l-green' },
+    { text:'&nbsp;' }
+  ];
+
+  const bootLines2 = [
+    { text:'[PV-Core] Commands registered successfully.', cls:'l-green' },
+    { text:'[PV-Economy] Economy database connected.', cls:'l-green' },
+    { text:'[PV-GUI] Inventory interfaces loaded.', cls:'l-green' },
+    { text:'[PV-Administration] Staff utilities loaded.', cls:'l-green' },
+    { text:'[PeacefulValley] Loaded successfully.', cls:'l-green' },
+    { text:'&nbsp;' },
+    { text:'4 plugins loaded.', cls:'l-white' },
+    { text:'0 errors.', cls:'l-white' },
+    { text:'Server status: <b>ONLINE</b>', cls:'l-gold' },
+    { text:'Boot time: 1.8s', cls:'l-gray' },
+    { text:'&nbsp;' },
+    { text:'This is an interactive simulation of the Peaceful Valley plugin suite — not a live Minecraft server.', cls:'l-gray' },
+    { text:'Type "help" to explore Peaceful Valley.', cls:'l-white' }
+  ];
+
+  let booted = false;
+
+  async function typeLine(item, delay){
+    if (reducedMotion) { printLines([item]); return; }
+    printLines([item]);
+    await sleep(delay);
+  }
+  function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
+
+  async function animateProgressBar(label, fast){
+    const div = document.createElement('div');
+    div.className = 'term-line l-gray';
+    termBody.appendChild(div);
+    const frames = fast ? [100] : [20, 45, 70, 90, 100];
+    for (const pct of frames){
+      const filled = Math.round(pct / 5);
+      const bar = '█'.repeat(filled) + '░'.repeat(20 - filled);
+      div.textContent = `${label} [${bar}] ${pct}%`;
+      scrollToBottom();
+      if (!reducedMotion) await sleep(fast ? 15 : 110);
+    }
+  }
+
+  async function runBoot(fast){
+    termBody.innerHTML = '';
+    const step = fast ? 12 : 55;
+    for (const l of bootLines) { await typeLine(l, step); }
+    await animateProgressBar('[PeacefulValley] Loading plugins...', fast || reducedMotion);
+    line('&nbsp;');
+    for (const l of pluginLoadLines) { await typeLine(l, step); }
+
+    const asciiDiv = document.createElement('div');
+    asciiDiv.innerHTML =
+      '<pre class="ascii full">' + asciiFull + '</pre>' +
+      '<pre class="ascii compact">' + asciiCompact + '</pre>';
+    termBody.appendChild(asciiDiv);
+    line('&nbsp;');
+    line('PEACEFUL VALLEY', 'l-white');
+    line('Minecraft Plugin Suite', 'l-gray');
+    line('&nbsp;');
+    scrollToBottom();
+    await sleep(fast ? 40 : 200);
+    for (const l of bootLines2) { await typeLine(l, step); }
+
+    // Blinking cursor beat before handing off to the real input
+    const cursorLine = document.createElement('div');
+    cursorLine.className = 'term-line';
+    cursorLine.innerHTML = '<span class="l-green">PV &gt;</span> <span class="blink-cursor">&nbsp;</span>';
+    termBody.appendChild(cursorLine);
+    scrollToBottom();
+    await sleep(fast || reducedMotion ? 60 : 500);
+
+    finishBoot();
+  }
+
+  function finishBoot(){
+    booted = true;
+    termInput.disabled = false;
+    termInput.focus();
+    skipBtn.style.display = 'none';
+    sessionStorage.setItem('pv_visited', '1');
+    scrollToBottom();
+  }
+
+  let bootStarted = false;
+  function startBoot(fast){
+    if (bootStarted) return;
+    bootStarted = true;
+    runBoot(fast);
+  }
+
+  skipBtn.addEventListener('click', () => {
+    if (booted) return;
+    termBody.innerHTML = '';
+    bootStarted = false;
+    startBoot(true);
+  });
+
+  /* ---------------- command engine ---------------- */
+  const HELP_TEXT = [
+    { text:'# PEACEFUL VALLEY COMMANDS', cls:'l-gold' },
+    { text:'&nbsp;' },
+    { text:'PROJECT', cls:'l-white' },
+    { text:'  about, projects, plugins, tech, server, github', cls:'l-gray' },
+    { text:'&nbsp;' },
+    { text:'PLAYER', cls:'l-white' },
+    { text:'  players, whoami, profile, balance, bal, user <player>', cls:'l-gray' },
+    { text:'&nbsp;' },
+    { text:'ECONOMY', cls:'l-white' },
+    { text:'  pay <player> <amount>, request <player> <amount>, accept, deny, transactions, baltop', cls:'l-gray' },
+    { text:'&nbsp;' },
+    { text:'GAMEPLAY', cls:'l-white' },
+    { text:'  gmc [player], gms [player], gma [player], gmsp [player], fly [player], heal [player], feed [player], spawn, home, sethome', cls:'l-gray' },
+    { text:'&nbsp;' },
+    { text:'PLUGIN INSPECTION', cls:'l-white' },
+    { text:'  plugins, inspect pv-core, inspect pv-economy, inspect pv-gui, inspect pv-administration, demo gui', cls:'l-gray' },
+    { text:'&nbsp;' },
+    { text:'TERMINAL', cls:'l-white' },
+    { text:'  help, clear, history, version, status', cls:'l-gray' },
+    { text:'&nbsp;' },
+    { text:'========================================', cls:'l-gray' }
+  ];
+
+  function playerBlock(who){
+    const p = state.players[who];
+    return { balance:p.balance };
+  }
+
+  function findPlayer(name){
+    if (!name) return null;
+    const match = PLAYER_NAMES.find(n => n.toLowerCase() === name.toLowerCase());
+    return match || null;
+  }
+
+  const commands = {};
+  function reg(names, fn){ names.split(',').forEach(n => commands[n.trim()] = fn); }
+
+  reg('help', () => HELP_TEXT);
+
+  reg('about', () => ([
+    { text:'# PEACEFUL VALLEY', cls:'l-gold' },
+    { text:'&nbsp;' },
+    'Peaceful Valley is a custom Minecraft server',
+    'and plugin ecosystem built around Java and',
+    'the PaperMC API.',
+    { text:'&nbsp;' },
+    'The project includes custom commands,',
+    'economy systems, player utilities,',
+    'inventory GUIs, administration tools,',
+    'persistent data, and Linux server',
+    'infrastructure.',
+    { text:'&nbsp;' },
+    'The project originated several years ago',
+    'and was later reconstructed and modernized',
+    'as part of my software engineering portfolio.',
+    { text:'&nbsp;' },
+    { text:'========================================', cls:'l-gray' }
+  ]));
+
+  reg('projects', () => ([
+    { text:'# OTHER PROJECTS', cls:'l-gold' },
+    { text:'&nbsp;' },
+    '• Rawh Wa Rayhan — full-stack e-commerce platform',
+    '• Business & organization websites (4 live deployments)',
+    { text:'&nbsp;' },
+    'See the main portfolio for details on these.',
+    { text:'========================================', cls:'l-gray' }
+  ]));
+
+  reg('plugins', () => ([
+    { text:'# Installed Plugins (4)', cls:'l-gold' },
+    { text:'&nbsp;' },
+    { text:'[✓] PV-Core              v2.0', cls:'l-green' },
+    { text:'[✓] PV-Economy           v2.0', cls:'l-green' },
+    { text:'[✓] PV-GUI               v2.0', cls:'l-green' },
+    { text:'[✓] PV-Administration    v2.0', cls:'l-green' },
+    { text:'&nbsp;' },
+    'All systems operational.',
+    { text:'&nbsp;' },
+    'Use: inspect <plugin>  to view details.'
+  ]));
+
+  reg('tech', () => ([
+    { text:'# TECH STACK', cls:'l-gold' },
+    { text:'&nbsp;' },
+    { text:'BACKEND', cls:'l-white' }, '  Java, PaperMC API',
+    { text:'&nbsp;' },
+    { text:'PROGRAMMING', cls:'l-white' }, '  OOP, Event-Driven Architecture, Command Handling, Data Persistence, Config Management',
+    { text:'&nbsp;' },
+    { text:'DATABASE', cls:'l-white' }, '  SQLite / MySQL',
+    { text:'&nbsp;' },
+    { text:'INFRASTRUCTURE', cls:'l-white' }, '  Ubuntu Linux, SSH, Shell, Cron, Server Configuration, Networking',
+    { text:'&nbsp;' },
+    { text:'DEVELOPMENT', cls:'l-white' }, '  Git, GitHub, Maven/Gradle, IntelliJ IDEA',
+    { text:'========================================', cls:'l-gray' }
+  ]));
+
+  reg('server', () => ([
+    { text:'# PEACEFUL VALLEY SERVER', cls:'l-gold' },
+    { text:'&nbsp;' },
+    'Status              ONLINE',
+    'Operating System    Ubuntu Linux',
+    'Runtime             Java',
+    'Server Platform     PaperMC',
+    'Management          SSH',
+    'Automation          Cron / Shell Scripts',
+    'Database            SQLite / MySQL',
+    'Version Control     Git',
+    'Networking          TCP/IP, Custom Port, Firewall Config',
+    { text:'========================================', cls:'l-gray' }
+  ]));
+
+  reg('github', () => ([
+    'GitHub: <a href="https://github.com/ZaidSu" target="_blank" rel="noopener">github.com/ZaidSu</a>'
+  ]));
+
+  reg('players', () => {
+    const out = [{ text:`# ONLINE PLAYERS`, cls:'l-gold' }, { text:`${PLAYER_NAMES.length} / 100`, cls:'l-white' }, { text:'&nbsp;' }];
+    PLAYER_NAMES.forEach(n => out.push({ text:`<span class="l-green">●</span> ${n}`, cls:'l-white' }));
+    out.push({ text:'========================================', cls:'l-gray' });
+    return out;
+  });
+
+  reg('whoami', () => ([`You are controlling demo player: <b>${state.currentUser}</b>`]));
+
+  reg('profile', () => {
+    const p = state.players[state.currentUser];
+    return [
+      { text:'# PLAYER PROFILE', cls:'l-gold' }, { text:'&nbsp;' },
+      `Name: ${state.currentUser}`,
+      `Balance: ${fmt(p.balance)}`,
+      `Flying: ${p.flying ? 'Yes' : 'No'}`,
+      `Home Set: ${p.home ? 'Yes' : 'No'}`,
+      { text:'========================================', cls:'l-gray' }
+    ];
+  });
+
+  reg('user, login', (args) => {
+    if (!args[0]) return [{ text:'Usage: user <player>', cls:'l-red' }];
+    const target = findPlayer(args[0]);
+    if (!target) return [{ text:`✗ Player "${args[0] || ''}" could not be found.`, cls:'l-red' }];
+    state.currentUser = target;
+    return [{ text:`Now controlling demo player: <b>${target}</b>`, cls:'l-green' }];
+  });
+
+  reg('balance, bal', (args) => {
+    if (args[0]) {
+      const target = findPlayer(args[0]);
+      if (!target) return [{ text:`✗ Player "${args[0]}" could not be found.`, cls:'l-red' }];
+      return [`${target}'s Balance: ${fmt(state.players[target].balance)}`];
+    }
+    return [
+      { text:'   PEACEFUL VALLEY BANK', cls:'l-gold' }, { text:'&nbsp;' },
+      `Account: ${state.currentUser}`,
+      `Balance: ${fmt(state.players[state.currentUser].balance)}`
+    ];
+  });
+
+  reg('pay', (args) => {
+    const targetName = findPlayer(args[0]);
+    const amount = parseFloat(args[1]);
+    const me = state.players[state.currentUser];
+
+    if (!args[0] || !args[1]) return [{text:'Usage: pay <player> <amount>', cls:'l-red'}];
+    if (targetName && targetName === state.currentUser) return [{ text:'✗ You cannot send money to yourself.', cls:'l-red' }];
+    if (!targetName) return [{ text:`✗ Player "${args[0]}" could not be found.`, cls:'l-red' }];
+    if (isNaN(amount)) return [{ text:'✗ Invalid amount.', cls:'l-red' }, 'Usage: pay <player> <amount>'];
+    if (amount <= 0) return [{ text:'✗ Amount must be greater than $0.', cls:'l-red' }];
+    if (amount > me.balance) return [
+      { text:'✗ Transaction failed.', cls:'l-red' }, { text:'&nbsp;' },
+      'Reason: Insufficient funds.', `Your Balance: ${fmt(me.balance)}`
+    ];
+
+    me.balance -= amount;
+    state.players[targetName].balance += amount;
+    state.transactions.unshift({ id: state.nextTxId++, from: state.currentUser, to: targetName, amount, status:'Completed' });
+
+    return [
+      { text:'✓ Payment successful.', cls:'l-green' }, { text:'&nbsp;' },
+      `You sent: ${fmt(amount)}`, `Recipient: ${targetName}`, `New Balance: ${fmt(me.balance)}`
+    ];
+  });
+
+  reg('request', (args) => {
+    if (!args[0] || !args[1]) return [{ text:'Usage: request <player> <amount>', cls:'l-red' }];
+    const targetName = findPlayer(args[0]);
+    const amount = parseFloat(args[1]);
+    if (!targetName) return [{ text:`✗ Player "${args[0] || ''}" could not be found.`, cls:'l-red' }];
+    if (isNaN(amount)) return [{ text:'✗ Invalid amount.', cls:'l-red' }, 'Usage: request <player> <amount>'];
+    if (amount <= 0) return [{ text:'✗ Amount must be greater than zero.', cls:'l-red' }];
+    state.requests.push({ from: state.currentUser, to: targetName, amount });
+    return [
+      { text:'✓ Payment request sent.', cls:'l-green' }, { text:'&nbsp;' },
+      `Requested: ${fmt(amount)}`, `From: ${targetName}`
+    ];
+  });
+
+  reg('requests', () => {
+    const mine = state.requests.filter(r => r.to === state.currentUser);
+    if (!mine.length) return ['No pending requests.'];
+    const out = [{ text:'Pending Requests:', cls:'l-white' }, { text:'&nbsp;' }];
+    mine.forEach(r => out.push(`${r.from} requested ${fmt(r.amount)}.`));
+    return out;
+  });
+
+  reg('accept', () => {
+    const idx = state.requests.findIndex(r => r.to === state.currentUser);
+    if (idx === -1) return [{ text:'No pending requests.', cls:'l-red' }];
+    const r = state.requests.splice(idx,1)[0];
+    const me = state.players[state.currentUser];
+    if (r.amount > me.balance) return [{ text:'✗ Insufficient funds to accept this request.', cls:'l-red' }];
+    me.balance -= r.amount;
+    state.players[r.from].balance += r.amount;
+    state.transactions.unshift({ id: state.nextTxId++, from: state.currentUser, to: r.from, amount:r.amount, status:'Completed' });
+    return [{ text:'✓ Request accepted.', cls:'l-green' }, `${fmt(r.amount)} sent to ${r.from}.`];
+  });
+
+  reg('deny', () => {
+    const idx = state.requests.findIndex(r => r.to === state.currentUser);
+    if (idx === -1) return [{ text:'No pending requests.', cls:'l-red' }];
+    state.requests.splice(idx,1);
+    return [{ text:'✓ Request denied.', cls:'l-gold' }];
+  });
+
+  reg('transactions', () => {
+    const out = [{ text:'# RECENT TRANSACTIONS', cls:'l-gold' }, { text:'&nbsp;' }];
+    state.transactions.slice(0,8).forEach(t => {
+      out.push(`#${t.id}`, `${t.from} -> ${t.to}`, `${fmt(t.amount)}`, { text:t.status, cls:'l-green' }, { text:'&nbsp;' });
+    });
+    out.push({ text:'========================================', cls:'l-gray' });
+    return out;
+  });
+
+  reg('baltop', () => {
+    const ranked = PLAYER_NAMES.slice().sort((a,b) => state.players[b].balance - state.players[a].balance);
+    const out = [{ text:'# PEACEFUL VALLEY BALANCE LEADERBOARD', cls:'l-gold' }, { text:'&nbsp;' }];
+    ranked.forEach((n,i) => out.push(`${i+1}. ${n.padEnd(12,' ')} ${fmt(state.players[n].balance)}`));
+    out.push({ text:'========================================', cls:'l-gray' });
+    return out;
+  });
+
+  function gamemodeHandler(mode){
+    return (args) => {
+      const target = args[0] ? findPlayer(args[0]) : state.currentUser;
+      if (args[0] && !target) return [{ text:`✗ Player "${args[0]}" was not found.`, cls:'l-red' }];
+      if (target === state.currentUser) return [{ text:`✓ Gamemode changed to ${mode}.`, cls:'l-green' }];
+      return [{ text:`✓ ${target}'s gamemode changed to ${mode}.`, cls:'l-green' }];
+    };
+  }
+  reg('gmc', gamemodeHandler('CREATIVE'));
+  reg('gms', gamemodeHandler('SURVIVAL'));
+  reg('gma', gamemodeHandler('ADVENTURE'));
+  reg('gmsp', gamemodeHandler('SPECTATOR'));
+
+  reg('fly', (args) => {
+    const target = args[0] ? findPlayer(args[0]) : state.currentUser;
+    if (args[0] && !target) return [{ text:`✗ Player "${args[0]}" was not found.`, cls:'l-red' }];
+    const p = state.players[target];
+    p.flying = !p.flying;
+    const verb = p.flying ? 'enabled' : 'disabled';
+    if (target === state.currentUser) return [{ text:`Flight ${verb}.`, cls:'l-green' }];
+    return [{ text:`Flight ${verb} for ${target}.`, cls:'l-green' }];
+  });
+
+  reg('heal', (args) => {
+    const target = args[0] ? findPlayer(args[0]) : state.currentUser;
+    if (args[0] && !target) return [{ text:`✗ Player "${args[0]}" was not found.`, cls:'l-red' }];
+    if (target === state.currentUser) return [{ text:'✓ You have been fully healed.', cls:'l-green' }];
+    return [{ text:`✓ ${target} has been fully healed.`, cls:'l-green' }];
+  });
+
+  reg('feed', (args) => {
+    const target = args[0] ? findPlayer(args[0]) : state.currentUser;
+    if (args[0] && !target) return [{ text:`✗ Player "${args[0]}" was not found.`, cls:'l-red' }];
+    if (target === state.currentUser) return [{ text:'✓ Your hunger has been restored.', cls:'l-green' }];
+    return [{ text:`✓ ${target}'s hunger has been restored.`, cls:'l-green' }];
+  });
+
+  reg('spawn', () => [{ text:'✓ Teleported to spawn.', cls:'l-green' }]);
+  reg('home', () => {
+    const p = state.players[state.currentUser];
+    if (!p.home) return [{ text:'✗ No home set. Use "sethome" first.', cls:'l-red' }];
+    return [{ text:'✓ Teleported home.', cls:'l-green' }];
+  });
+  reg('sethome', () => { state.players[state.currentUser].home = true; return [{ text:'✓ Home set at your current location.', cls:'l-green' }]; });
+
+  reg('inspect', (args) => {
+    const target = (args[0] || '').toLowerCase();
+    if (!target) return [{ text:'Usage: inspect <pv-core|pv-economy|pv-gui|pv-administration>', cls:'l-red' }];
+    const map = {
+      'pv-core': [
+        { text:'# PV-CORE', cls:'l-gold' }, { text:'&nbsp;' },
+        'Core server functionality and player utility commands.', { text:'&nbsp;' },
+        { text:'Features:', cls:'l-white' },
+        '• Game mode aliases', '• Player utilities', '• Messaging', '• Spawn system',
+        '• Home system', '• Permission checks', '• Command aliases', '• Player targeting',
+        '• Server notifications', '• Configuration files', { text:'&nbsp;' },
+        { text:'Example Commands:', cls:'l-white' },
+        '/gmc  /gmc <player>', '/gms  /gms <player>', '/gma  /gma <player>', '/gmsp  /gmsp <player>',
+        '/fly  /heal  /feed  /spawn  /home  /sethome', { text:'&nbsp;' },
+        'Language: Java', 'API: PaperMC', 'Architecture: Event-Driven / Object-Oriented',
+        { text:'========================================', cls:'l-gray' }
+      ],
+      'pv-economy': [
+        { text:'# PV-ECONOMY', cls:'l-gold' }, { text:'&nbsp;' },
+        'Custom virtual economy system for Peaceful Valley.', { text:'&nbsp;' },
+        { text:'Features:', cls:'l-white' },
+        '• Player balances', '• Player-to-player payments', '• Payment requests', '• Accept / deny requests',
+        '• Transaction history', '• Economy leaderboards', '• Admin balance management',
+        '• Persistent player data', '• Currency formatting', '• Validation and error handling', { text:'&nbsp;' },
+        { text:'Commands:', cls:'l-white' },
+        '/balance  /bal', '/pay <player> <amount>', '/request <player> <amount>', '/accept  /deny',
+        '/transactions  /baltop',
+        { text:'========================================', cls:'l-gray' }
+      ],
+      'pv-gui': [
+        { text:'# PV-GUI', cls:'l-gold' }, { text:'&nbsp;' },
+        'Custom inventory-based interfaces created using Minecraft inventory events.', { text:'&nbsp;' },
+        { text:'Systems include:', cls:'l-white' },
+        '• Main server menu', '• Player profile menu', '• Economy menu', '• Shop interface',
+        '• Navigation buttons', '• Item click events', '• Dynamic item descriptions', '• Permission-based options',
+        { text:'&nbsp;' }, { text:'Technology:', cls:'l-white' }, 'Java, PaperMC Inventory API, Event Listeners',
+        { text:'&nbsp;' }, 'Type "demo gui" to see a simplified visual mockup.',
+        { text:'========================================', cls:'l-gray' }
+      ],
+      'pv-administration': [
+        { text:'# PV-ADMINISTRATION', cls:'l-gold' }, { text:'&nbsp;' },
+        'Administrative and moderation utilities.', { text:'&nbsp;' },
+        { text:'Features:', cls:'l-white' },
+        '• Player management', '• Staff commands', '• Server broadcasts', '• Economy controls',
+        '• Player teleport utilities', '• Permission checks', '• Server maintenance commands', '• Activity logging',
+        { text:'&nbsp;' }, { text:'Example Commands:', cls:'l-white' },
+        '/pvadmin  /broadcast  /setbalance  /addbalance  /tp  /tphere  /kick  /serverinfo',
+        { text:'========================================', cls:'l-gray' }
+      ]
+    };
+    if (!map[target]) return [{ text:`Unknown module: ${args[0] || ''}`, cls:'l-red' }, 'Try: inspect pv-core, inspect pv-economy, inspect pv-gui, inspect pv-administration'];
+    return map[target];
+  });
+
+  reg('demo', (args) => {
+    if ((args[0]||'').toLowerCase() === 'gui') { openGui(); return [{ text:'Opening PV-GUI mockup...', cls:'l-gray' }]; }
+    if ((args[0]||'').toLowerCase() === 'join') return [
+      { text:'PEACEFUL VALLEY', cls:'l-gold' }, { text:'&nbsp;' },
+      `Welcome back, ${state.currentUser}!`, { text:'&nbsp;' },
+      `Balance: ${fmt(state.players[state.currentUser].balance)}`,
+      `Players Online: ${PLAYER_NAMES.length}`, { text:'&nbsp;' },
+      'Use /help to get started.'
+    ];
+    return [{ text:'Usage: demo gui  |  demo join', cls:'l-red' }];
+  });
+
+  reg('status', () => ([
+    { text:'# PEACEFUL VALLEY STATUS', cls:'l-gold' }, { text:'&nbsp;' },
+    'Server              ONLINE', 'PV-Core             ENABLED', 'PV-Economy          ENABLED',
+    'PV-GUI              ENABLED', 'PV-Administration   ENABLED', 'Database            CONNECTED',
+    `Players             ${PLAYER_NAMES.length} / 100`, 'Errors              0',
+    { text:'========================================', cls:'l-gray' }
+  ]));
+
+  reg('version', () => ([
+    'Peaceful Valley — Portfolio Reconstruction', { text:'&nbsp;' },
+    'Version 2.0', 'Original project concept: 2023–2024 era', 'Modernized: 2026',
+    'Platform: PaperMC', 'Language: Java'
+  ]));
+
+  reg('history', () => {
+    if (!state.history.length) return ['No command history yet.'];
+    return state.history.map((c,i) => `${i+1}  ${c}`);
+  });
+
+  reg('clear', () => { termBody.innerHTML = ''; return null; });
+
+  reg('sudo', (args) => {
+    if (args.join(' ') === 'rm -rf /') return [{ text:'Permission denied.', cls:'l-red' }, 'Peaceful Valley would prefer to remain online.'];
+    return [{ text:'Zaid is already the administrator.', cls:'l-gold' }];
+  });
+  reg('coffee', () => [{ text:'Java detected.', cls:'l-gold' }, '☕ Compiling...']);
+  reg('ping', () => [{ text:'PONG', cls:'l-green' }, `${Math.floor(Math.random()*30)+18}ms`]);
+  reg('hello, hi', () => ['Welcome to Peaceful Valley.']);
+
+  const ALL_COMMANDS = Object.keys(commands);
+
+  function runCommand(raw){
+    const clean = raw.trim().replace(/^\//, '');
+    if (!clean) return;
+    state.history.push(raw.trim());
+    state.histIndex = state.history.length;
+
+    line(`<span class="l-green">PV &gt;</span> ${escapeHtml(raw.trim())}`, 'l-white');
+
+    const parts = clean.split(/\s+/);
+    const cmdName = parts[0].toLowerCase();
+    const args = parts.slice(1);
+
+    if (!(cmdName in commands)) {
+      printLines([{ text:`Unknown command: ${escapeHtml(cmdName)}`, cls:'l-red' }, 'Type "help" for available commands.']);
+      return;
+    }
+    const result = commands[cmdName](args);
+    if (result) printLines(result);
+    scrollToBottom();
+  }
+
+  function escapeHtml(s){ return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  /* ---------------- input handling ---------------- */
+  termInput.addEventListener('keydown', (e) => {
+    if (!booted) return;
+    if (e.key === 'Enter') {
+      const val = termInput.value;
+      termInput.value = '';
+      runCommand(val);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (state.history.length) {
+        state.histIndex = Math.max(0, state.histIndex - 1);
+        termInput.value = state.history[state.histIndex] || '';
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (state.history.length) {
+        state.histIndex = Math.min(state.history.length, state.histIndex + 1);
+        termInput.value = state.history[state.histIndex] || '';
+      }
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+      const partial = termInput.value.trim().toLowerCase();
+      if (!partial) return;
+      const matches = ALL_COMMANDS.filter(c => c.startsWith(partial));
+      if (matches.length === 1) termInput.value = matches[0] + ' ';
+      else if (matches.length > 1) printLines([{ text: matches.join('   '), cls:'l-gray' }]);
+    }
+  });
+
+  termBody.addEventListener('click', () => termInput.focus());
+
+  /* ---------------- module card buttons -> run inspect ---------------- */
+  document.querySelectorAll('.explore-module').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelector('.term-shell').scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block:'start' });
+      if (booted) {
+        termInput.value = btn.dataset.cmd;
+        setTimeout(() => runCommand(btn.dataset.cmd), reducedMotion ? 0 : 400);
+        termInput.value = '';
+      }
+    });
+  });
+
+  /* ---------------- demo gui modal ---------------- */
+  function openGui(){ guiOverlay.classList.add('open'); }
+  function closeGui(){ guiOverlay.classList.remove('open'); }
+  guiClose.addEventListener('click', closeGui);
+  guiOverlay.addEventListener('click', (e) => { if (e.target === guiOverlay) closeGui(); });
+  document.querySelectorAll('.gui-slot').forEach(slot => {
+    slot.addEventListener('click', () => {
+      closeGui();
+      if (booted) runCommand(slot.dataset.cmd);
+      document.querySelector('.term-shell').scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block:'start' });
+    });
+  });
+
+  /* ---------------- boot on load ---------------- */
+  const visitedBefore = sessionStorage.getItem('pv_visited') === '1';
+  startBoot(reducedMotion || visitedBefore);
+
+})();
+</script>
+
+</body>
+</html>
